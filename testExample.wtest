@@ -1,9 +1,65 @@
-import example.pepita
+import example.*
+import empresa.*
 
-describe "group of tests for pepita" {
+describe "Grupo de test donde se prueban diferentes situaciones" {
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+ 
+    
+   test "neo puede llevar paquete a puente" {
+    assert.that(paquete.mensajeroPuedeLlegarADestino (neo))
+  }
+
+test "neo no puede llevar paquete que no está pago a la matrix" {
+
+    paquete.cambioEstadoDePago ()
+    paquete.cambiarDestino (matrix)
+    assert.that(!paquete.mensajeroPuedeLlegarADestino (neo))
   }
 
 }
+
+test "roberto (90kg) puede llevar un paquete que está pago en un camión que tiene un acoplado hacia broklin" {
+    camion.cantidadDeAcoplados(1)
+    roberto.cambiarTransporte (camion)
+    assert.that(paquete.mensajeroPuedeLlegarADestino (roberto))
+  }
+
+test "roberto (90kg) no puede llevar un paquete que está pago en un camión que tiene 2 acoplados hacia broklin" {
+    camion.cantidadDeAcoplados(2)
+    roberto.cambiarTransporte (camion)
+    assert.that(!paquete.mensajeroPuedeLlegarADestino (roberto))
+  }
+
+
+describe "test punt 2" {
+
+
+test "mensajería contrata a chuck y está en la lista de mensajeros" {
+    empresa.despedirATodos()
+    empresa.contratar(chuck)
+    assert.equals(empresa.mensajeros().contains(chuck),true)
+  }
+
+}
+
+test "mensajería despide a roberto y no está en la lista de mensajeros" {
+    empresa.despedir(roberto)
+    assert.equals(!empresa.mensajeros().contains(roberto),true)
+  }
+
+test "mensajería despide a todos y la lista de mensajeros queda vacia" {
+    empresa.despedirATodos()
+    assert.equals(empresa.mensajeros().isEmpty(),true)
+  }
+
+test "la mensajería es grande" {
+    assert.equals(empresa.esGrande() , true)
+  }
+
+
+
+test "chuck es el último empleado y su peso es 80" {
+    assert.equals(empresa.pesoUltimoEmpleado(), 80)
+}
+
+
