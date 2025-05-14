@@ -128,7 +128,3 @@ object camion {
   }
 
 }
-
-
-
-
